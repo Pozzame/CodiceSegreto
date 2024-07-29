@@ -1,24 +1,33 @@
-﻿Random rng = new Random();
-
-Console.Clear();
-Console.WriteLine("-----Indovina PIN di 4 cifre-----");
-
-string PINSegreto = GeneraPIN();
-do
+﻿internal class Program
 {
-    Console.WriteLine("Inserisci PIN");
-} while(!ProvaPIN(Console.ReadLine()!));
-Console.WriteLine("Bravo");
+    static void Main(string[] args)
+    {
+        Random rng = new Random();
 
-bool ProvaPIN(string PIN)
-{
-    if (PIN == PINSegreto)
-        return true;
-    else
-        return false;
-}
+        Console.Clear();
+        Console.WriteLine("-----Indovina PIN di 4 cifre-----");
 
-string GeneraPIN()
-{
-    return rng.Next(1, 1000).ToString("D4");
+        string PINSegreto = GeneraPIN();
+        if (args.Length != 0 && args[0] == "-d") Console.WriteLine(PINSegreto);
+
+        do
+        {
+            Console.WriteLine("Inserisci PIN");
+        } while (!ProvaPIN(Console.ReadLine()!));
+        
+        Console.WriteLine("Bravo");
+
+        bool ProvaPIN(string PIN)
+        {
+            if (PIN == PINSegreto)
+                return true;
+            else
+                return false;
+        }
+
+        string GeneraPIN()
+        {
+            return rng.Next(1, 1000).ToString("D4");
+        }
+    }
 }
